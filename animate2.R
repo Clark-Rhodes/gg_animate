@@ -38,7 +38,8 @@ p <- ggplot(data = df1, aes(x = Year, y = CO2, color = Country))+
   theme(legend.position = "top",
         legend.title = element_blank(),
         legend.justification='left',
-        legend.text = element_text(size = 9))
+        legend.text = element_text(size = 10),
+        plot.title = element_text(size=18))
 p
 
 # animate with transition_reveal()
@@ -46,10 +47,11 @@ p.animate <- p + transition_reveal(Year)
 p.animate
 
 # enhance the animation - adjust size, frames per second, duration of animation, end pause
-animate(p.animate, height = 500, width = 800,
+animate(p.animate, height = 500, width = 750,
         fps = 30, duration = 8, end_pause = 90)
 
-
+# save your animation - consider setting your working directory
+anim_save("CO2 Emissions in North America.gif")
 
 
 
