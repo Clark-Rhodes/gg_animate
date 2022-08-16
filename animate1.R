@@ -1,11 +1,11 @@
-# animate 3 - world population
-
 # packages
 library(ggplot2)
 library(gganimate)
 library(tidyverse)
 
 # get and ready data
+# Data from Devakumar K. P. on Kaggle 
+# url: "https://www.kaggle.com/datasets/imdevskp/world-population-19602018"
 pop <- as.data.frame(read.csv("population_total_long.csv"))
 popNA <- filter(pop, Country.Name %in% c("Canada","United States","Mexico"))
 
@@ -22,11 +22,11 @@ p1 <- popNA %>% ggplot(aes(x=Year, y=Count, color = Country.Name))+
         legend.justification='left',
         legend.text = element_text(size = 10),
         plot.title = element_text(size=18))+
-  labs(title = "Population in North America (1960-2018)",
-       subtitle = 'Year: {frame_along}')
+  labs(title = "Population in North America (1960-2017)")
 
 # animate data
-p1.animate <- p1 + transition_reveal(Year)
+p1.animate <- p1 + transition_reveal(Year)+
+  labs(subtitle = 'Year: {frame_along}')
 p1.animate
 
 # customize animation

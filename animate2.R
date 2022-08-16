@@ -27,14 +27,15 @@ df$Year <- as.integer(df$Year)
 # North America Only (Mexico labeled as Latin America)
 df1 <- filter(df, Region == "North America" | Country == "Mexico")
 
+# ggplot
+
 p <- ggplot(data = df1, aes(x = Year, y = CO2, color = Country))+
   geom_line(size = 1.25)+
   scale_y_continuous("Metric tons per Capita")+
   geom_point(size = 2.0)+
   theme_hc(style = "darkunica") +
   scale_colour_hc("darkunica")+
-  labs(title = "CO2 Emissions in North America (1990-2019)",
-        subtitle = 'Year: {frame_along}')+
+  labs(title = "CO2 Emissions in North America (1990-2019)")+
   theme(legend.position = "top",
         legend.title = element_blank(),
         legend.justification='left',
@@ -43,7 +44,8 @@ p <- ggplot(data = df1, aes(x = Year, y = CO2, color = Country))+
 p
 
 # animate with transition_reveal()
-p.animate <- p + transition_reveal(Year)
+p.animate <- p + transition_reveal(Year)+
+  labs(subtitle = 'Year: {frame_along}')
 p.animate
 
 # enhance the animation - adjust size, frames per second, duration of animation, end pause
